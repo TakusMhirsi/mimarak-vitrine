@@ -1,0 +1,349 @@
+<title>MIMARAK</title>
+<meta name="description" content="MIMARAK accompagne les architectes et leurs clients, du terrain jusqu'au dossier de chantier chiffré, avec des règles techniques déterministes en plomberie et en électricité.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#f4f1ea;
+  --surface:#ffffff;
+  --surface-2:#faf8f3;
+  --ink:#1c1a16;
+  --ink-soft:#5c5749;
+  --muted:#948c78;
+  --line:#e1dacb;
+  --line-strong:#c9bfa8;
+  --accent:#a97c34;
+  --accent-deep:#7c5a24;
+  --accent-soft:#f1e6d2;
+  --good:#3d6b4c;
+  --good-bg:#e9f1ea;
+  --sidebar:#15130f;
+  --sidebar-ink:#d9cfba;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15130f;
+    --surface:#1d1b15;
+    --surface-2:#211f19;
+    --ink:#f2ede1;
+    --ink-soft:#cabfa9;
+    --muted:#8c8271;
+    --line:#332f26;
+    --line-strong:#454031;
+    --accent:#d3a35f;
+    --accent-deep:#e8c384;
+    --accent-soft:#332a1a;
+    --good:#7fb894;
+    --good-bg:#1c2c22;
+    --sidebar:#0c0b08;
+    --sidebar-ink:#d9cfba;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15130f;
+  --surface:#1d1b15;
+  --surface-2:#211f19;
+  --ink:#f2ede1;
+  --ink-soft:#cabfa9;
+  --muted:#8c8271;
+  --line:#332f26;
+  --line-strong:#454031;
+  --accent:#d3a35f;
+  --accent-deep:#e8c384;
+  --accent-soft:#332a1a;
+  --good:#7fb894;
+  --good-bg:#1c2c22;
+  --sidebar:#0c0b08;
+  --sidebar-ink:#d9cfba;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:16px;line-height:1.6;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;text-wrap:balance;margin:0;color:var(--ink)}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto}
+.eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent-deep);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);display:inline-block}
+.scale-rule{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+.scale-rule .tick{width:1px;height:7px;background:var(--line-strong)}
+.scale-rule .track{flex:1;height:1px;background:var(--line-strong)}
+section{padding:76px 0}
+@media(max-width:640px){section{padding:52px 0}}
+
+/* ---------- brandmark ---------- */
+.brandmark{display:flex;align-items:center;gap:12px}
+.brandmark .word{display:flex;flex-direction:column;line-height:1}
+.brandmark .en{font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:.2px}
+.brandmark .tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+/* ---------- header ---------- */
+.site-header{padding:22px 0;position:sticky;top:env(safe-area-inset-top,0px);background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(6px);z-index:10;border-bottom:1px solid var(--line)}
+.site-header .row{display:flex;align-items:center;justify-content:space-between}
+.header-links{display:flex;align-items:center;gap:26px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.header-links a{border-bottom:1px solid transparent}
+.header-links a:hover{border-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:3px;padding:12px 20px;font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer;border:1px solid transparent;letter-spacing:.1px}
+.btn-primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+.header-cta{display:none}
+@media(min-width:720px){.header-cta{display:inline-flex}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:64px 0 88px}
+.hero-arches{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55}
+:root[data-theme="dark"] .hero-arches, @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-arches{opacity:.4}}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero h1{font-size:clamp(34px,5.4vw,58px);letter-spacing:-.5px;margin-top:22px}
+.hero .lede{font-size:18px;color:var(--ink-soft);max-width:52ch;margin-top:20px}
+.hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero-note{margin-top:26px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.hero-note .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* ---------- problem cards ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:820px){.grid-3{grid-template-columns:1fr}}
+.problem-card{background:var(--surface);padding:32px 30px}
+.problem-card .n{font-family:'Fraunces',serif;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.problem-card h3{font-size:19px;margin-top:14px}
+.problem-card p{margin-top:12px;color:var(--ink-soft);font-size:14.5px}
+
+/* ---------- parcours (blueprint spine) ---------- */
+.parcours{position:relative}
+.spine{position:relative;padding-left:56px}
+.spine::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;width:1px;background:repeating-linear-gradient(to bottom,var(--line-strong) 0 6px,transparent 6px 11px)}
+.step{position:relative;padding:26px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:none}
+.step-marker{position:absolute;left:-56px;top:26px;width:39px;height:39px;border-radius:50%;background:var(--surface);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
+.step-body{display:grid;grid-template-columns:1fr;gap:6px}
+.step h3{font-size:18px}
+.step p{color:var(--ink-soft);font-size:14.5px;max-width:62ch}
+.transparency-note{margin-top:36px;padding:20px 22px;border:1px solid var(--line-strong);border-radius:3px;background:var(--surface-2);font-size:13.5px;color:var(--ink-soft);display:flex;gap:14px;align-items:flex-start}
+.transparency-note svg{flex:none;margin-top:2px;color:var(--accent)}
+
+/* ---------- pour qui ---------- */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:720px){.grid-2{grid-template-columns:1fr}}
+.who-card{background:var(--surface);padding:34px 32px}
+.who-card .role{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-deep)}
+.who-card h3{font-size:22px;margin-top:10px}
+.who-card p{margin-top:12px;color:var(--ink-soft);font-size:14.5px}
+
+/* ---------- rigueur ---------- */
+.rigueur{background:var(--sidebar);color:var(--sidebar-ink);border-radius:4px;padding:48px 44px}
+@media(max-width:640px){.rigueur{padding:34px 24px}}
+.rigueur .eyebrow{color:var(--accent)}
+.rigueur .eyebrow::before{background:var(--accent)}
+.rigueur h2{color:#fff;font-size:clamp(24px,3vw,32px);margin-top:16px;max-width:20ch}
+.rigueur p{margin-top:18px;max-width:64ch;font-size:15px;color:#cfc6b0;line-height:1.7}
+.rigueur .fine{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:#a89d84}
+
+/* ---------- waitlist ---------- */
+.waitlist{text-align:center;max-width:520px;margin:0 auto}
+.waitlist h2{font-size:clamp(24px,3vw,32px)}
+.waitlist p{margin-top:12px;color:var(--ink-soft)}
+.waitlist-form{margin-top:28px;display:flex;gap:10px;border:1px solid var(--line-strong);border-radius:3px;padding:5px;background:var(--surface)}
+@media(max-width:520px){.waitlist-form{flex-direction:column;border:none;padding:0;gap:10px}}
+.waitlist-form input{flex:1;border:none;background:transparent;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-width:0}
+.waitlist-form input:focus{outline:none}
+@media(max-width:520px){.waitlist-form input{border:1px solid var(--line-strong);border-radius:3px}}
+.waitlist-form button{border-radius:2px}
+.waitlist-msg{margin-top:16px;font-size:13.5px;color:var(--good);display:none;align-items:center;justify-content:center;gap:8px}
+.waitlist-msg.show{display:flex}
+.waitlist-msg svg{color:var(--good)}
+
+/* ---------- footer ---------- */
+footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer-links{display:flex;gap:22px;font-size:13px;color:var(--muted)}
+.footer-langs{display:flex;gap:12px;font-size:12px;font-weight:700}
+.footer-langs span.on{color:var(--ink)}
+.footer-langs span:not(.on){color:var(--muted);cursor:default}
+.footer-note{margin-top:18px;font-size:12px;color:var(--muted)}
+</style>
+
+<header class="site-header">
+  <div class="wrap row">
+    <div class="brandmark">
+      <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1"/><path d="M9 21 L17 10 L25 21" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1.4"/><path d="M12.5 21 L17 14.5 L21.5 21" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1.4"/><circle cx="17" cy="24" r="1.1" fill="var(--accent)"/></svg>
+      <div class="word"><span class="en">Mimarak</span><span class="tag">معمارك</span></div>
+    </div>
+    <nav class="header-links">
+      <a href="#parcours">Parcours</a>
+      <a href="#rigueur">Rigueur technique</a>
+      <a class="btn btn-primary header-cta" href="#liste-attente">Rejoindre la liste d'attente</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="hero-arches" viewBox="0 0 1080 420" preserveAspectRatio="xMaxYMin slice" aria-hidden="true">
+      <g fill="none" stroke="var(--accent)">
+        <path d="M700,420 L700,300 A190,190 0 0 1 1080,300 L1080,420" stroke-opacity=".12" stroke-width="1.4"/>
+        <path d="M752,400 L752,292 A164,164 0 0 1 1080,292 L1080,400" stroke-opacity=".16" stroke-width="1.2"/>
+        <path d="M804,378 L804,282 A138,138 0 0 1 1080,282 L1080,378" stroke-opacity=".20" stroke-width="1.1"/>
+        <path d="M856,354 L856,270 A112,112 0 0 1 1080,270 L1080,354" stroke-opacity=".25" stroke-width="1"/>
+        <path d="M908,328 L908,258 A86,86 0 0 1 1080,258 L1080,328" stroke-opacity=".30" stroke-width=".9"/>
+        <path d="M960,300 L960,244 A60,60 0 0 1 1080,244 L1080,300" stroke-opacity=".38" stroke-width=".8"/>
+      </g>
+    </svg>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Assistance architecte / client</span>
+      <h1>Du terrain au dossier de chantier, un seul fil conducteur.</h1>
+      <p class="lede">MIMARAK aide l'architecte et son client à avancer ensemble : terrain, besoins, plans, réseaux techniques, rendu 3D, chiffrage — jusqu'au dossier remis à l'entrepreneur.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#liste-attente">Rejoindre la liste d'attente</a>
+        <a class="btn btn-ghost" href="#parcours">Voir le parcours</a>
+      </div>
+      <p class="hero-note"><span class="dot"></span>Conçu d'abord pour le marché tunisien — COS, STEG, SONEDE, ONAS.</p>
+    </div>
+  </section>
+
+  <section id="probleme">
+    <div class="wrap">
+      <span class="eyebrow">Le constat</span>
+      <h2 style="font-size:clamp(22px,3vw,30px);margin-top:14px;max-width:32ch">Ce que MIMARAK cherche à corriger</h2>
+      <div class="grid-3" style="margin-top:32px">
+        <div class="problem-card">
+          <div class="n">01</div>
+          <h3>Le brief se perd en allers-retours</h3>
+          <p>Les besoins du client — chambres, priorités, style — sont reformulés plusieurs fois avant que le plan ne corresponde vraiment à sa vie quotidienne.</p>
+        </div>
+        <div class="problem-card">
+          <div class="n">02</div>
+          <h3>La plomberie et l'électricité arrivent tard</h3>
+          <p>Les réseaux techniques sont souvent pensés après le plan architectural, ce qui coûte des reprises.</p>
+        </div>
+        <div class="problem-card">
+          <div class="n">03</div>
+          <h3>Le chiffrage reste approximatif longtemps</h3>
+          <p>Le client attend un ordre de prix fiable pour se décider ; l'architecte attend un plan stable pour chiffrer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours" class="parcours">
+    <div class="wrap">
+      <span class="eyebrow">Le parcours</span>
+      <h2 style="font-size:clamp(24px,3.4vw,34px);margin-top:14px;max-width:30ch">Sept étapes, du terrain au dossier final</h2>
+      <div class="scale-rule" style="margin-top:22px"><span class="tick"></span><span class="track"></span><span>7 étapes</span><span class="track"></span><span class="tick"></span></div>
+
+      <div class="spine" style="margin-top:36px">
+        <div class="step"><span class="step-marker">01</span>
+          <div class="step-body"><h3>Terrain</h3><p>COS, hauteur maximale autorisée, réseaux disponibles en façade (STEG, SONEDE, ONAS), contraintes et servitudes.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">02</span>
+          <div class="step-body"><h3>Besoins &amp; priorités</h3><p>Nombre de pièces, et un questionnaire de priorités (lumière, intimité, rangements, domotique...) qui oriente les propositions plutôt que de les imposer.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">03</span>
+          <div class="step-body"><h3>Style</h3><p>Choix d'une direction architecturale, ou import d'un plan déjà dessiné par l'architecte.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">04</span>
+          <div class="step-body"><h3>Plans proposés</h3><p>Plusieurs variantes comparées sur des critères concrets : surface, coût gros œuvre estimé, longueur de plomberie.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">05</span>
+          <div class="step-body"><h3>Réseaux techniques</h3><p>Plomberie (EF/ECS/évacuation) et électricité générées sur le plan choisi, avec tableaux de synthèse et checklist de cohérence.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">06</span>
+          <div class="step-body"><h3>Rendu 3D &amp; validation</h3><p>Visite du volume proposé, document de validation signé entre l'architecte et le client.</p></div>
+        </div>
+        <div class="step"><span class="step-marker">07</span>
+          <div class="step-body"><h3>Chiffrage &amp; dossier final</h3><p>Quantitatifs, main-d'œuvre, et dossier remis à l'entrepreneur.</p></div>
+        </div>
+      </div>
+
+      <div class="transparency-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <p>Les plans et rendus 3D sont des propositions à valider par l'architecte. Les règles de plomberie et d'électricité s'appuient sur des référentiels techniques dédiés ; toute valeur non confirmée reste marquée comme non vérifiée plutôt que d'être arrondie silencieusement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pour-qui">
+    <div class="wrap">
+      <span class="eyebrow">Pour qui</span>
+      <h2 style="font-size:clamp(22px,3vw,30px);margin-top:14px">Pensé pour deux points de vue</h2>
+      <div class="grid-2" style="margin-top:32px">
+        <div class="who-card">
+          <div class="role">Architectes</div>
+          <h3>Moins d'itérations, plus de décisions</h3>
+          <p>Passez moins de temps sur les allers-retours de brief et de plans préliminaires. Gardez la main sur chaque validation.</p>
+        </div>
+        <div class="who-card">
+          <div class="role">Clients particuliers</div>
+          <h3>Un projet compris à chaque étape</h3>
+          <p>Terrain, plan, réseaux, budget — sans jargon technique imposé d'un coup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rigueur">
+    <div class="wrap">
+      <div class="rigueur">
+        <span class="eyebrow">Rigueur technique</span>
+        <h2>Les règles ne s'inventent pas</h2>
+        <p>Les modules plomberie et électricité de MIMARAK s'appuient sur des référentiels de conception dédiés, et non sur des approximations génériques. Quand une donnée locale n'est pas confirmée, elle reste signalée comme telle plutôt que d'être remplacée par une valeur « typique ».</p>
+        <p class="fine">Ces référentiels sont en cours de constitution et de relecture professionnelle continue. MIMARAK ne remplace pas la validation d'un architecte, d'un électricien ou d'un plombier qualifié.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="liste-attente">
+    <div class="wrap waitlist">
+      <span class="eyebrow" style="justify-content:center">Être averti au lancement</span>
+      <h2 style="margin-top:14px">Rejoindre la liste d'attente</h2>
+      <p>Vous serez informé(e) dès l'ouverture des premiers accès.</p>
+      <form class="waitlist-form" id="waitlist-form">
+        <input id="waitlist-email" type="email" required placeholder="vous@exemple.com" aria-label="Adresse e-mail">
+        <button class="btn btn-primary" type="submit">Rejoindre</button>
+      </form>
+      <p class="waitlist-msg" id="waitlist-msg" role="status">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        Merci — vous serez informé(e) dès l'ouverture des premiers accès.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="brandmark">
+        <svg width="22" height="22" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1"/><path d="M9 21 L17 10 L25 21" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1.4"/></svg>
+        <div class="word"><span class="en" style="font-size:15px">Mimarak</span></div>
+      </div>
+      <div class="footer-links">
+        <span style="color:var(--ink-soft)">MIMARAK — Tunisie</span>
+        <a href="#">À propos</a>
+        <a href="#liste-attente">Contact</a>
+      </div>
+      <div class="footer-langs">
+        <span class="on">FR</span><span title="Traduction arabe en attente de relecture (tâche T6)">AR</span><span title="Pas encore rédigé">EN</span>
+      </div>
+    </div>
+    <p class="footer-note">Site en construction — page d'accueil, phase 1 sur 3. Contenu non relu par un professionnel du métier.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('waitlist-form');
+  var msg = document.getElementById('waitlist-msg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    // Aucun service d'e-mail n'est encore branché (voir COLLAB.md) : ceci
+    // affiche le message de confirmation prévu par le contenu, sans
+    // prétendre enregistrer réellement l'adresse quelque part.
+    form.hidden = true;
+    msg.classList.add('show');
+  });
+})();
+</script>
