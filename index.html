@@ -1,8 +1,17 @@
-<title>MIMARAK</title>
-<meta name="description" content="MIMARAK accompagne les architectes et leurs clients, du terrain jusqu'au dossier de chantier chiffré, avec des règles techniques déterministes en plomberie et en électricité.">
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MIMARAK — Du terrain au dossier de chantier</title>
+<meta name="description" content="MIMARAK accompagne les architectes et leurs clients, du terrain jusqu'au dossier de chantier, avec des règles techniques déterministes en plomberie et en électricité.">
+<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15130f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
-
 :root{
   --bg:#f4f1ea;
   --surface:#ffffff;
@@ -61,7 +70,7 @@
 }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:16px;line-height:1.6;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:16px;line-height:1.6;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;text-wrap:balance;margin:0;color:var(--ink)}
 p{margin:0}
 a{color:inherit}
@@ -93,11 +102,13 @@ section{padding:76px 0}
 .btn-ghost:hover{border-color:var(--ink)}
 .header-cta{display:none}
 @media(min-width:720px){.header-cta{display:inline-flex}}
+@media(max-width:640px){.header-links{display:none}}
 
 /* ---------- hero ---------- */
 .hero{position:relative;overflow:hidden;padding:64px 0 88px}
 .hero-arches{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55}
-:root[data-theme="dark"] .hero-arches, @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-arches{opacity:.4}}
+:root[data-theme="dark"] .hero-arches{opacity:.4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-arches{opacity:.4}}
 .hero-inner{position:relative;z-index:1;max-width:760px}
 .hero h1{font-size:clamp(34px,5.4vw,58px);letter-spacing:-.5px;margin-top:22px}
 .hero .lede{font-size:18px;color:var(--ink-soft);max-width:52ch;margin-top:20px}
@@ -115,11 +126,11 @@ section{padding:76px 0}
 
 /* ---------- parcours (blueprint spine) ---------- */
 .parcours{position:relative}
-.spine{position:relative;padding-left:56px}
-.spine::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;width:1px;background:repeating-linear-gradient(to bottom,var(--line-strong) 0 6px,transparent 6px 11px)}
+.spine{position:relative;padding-inline-start:56px}
+.spine::before{content:"";position:absolute;inset-inline-start:19px;top:10px;bottom:10px;width:1px;background:repeating-linear-gradient(to bottom,var(--line-strong) 0 6px,transparent 6px 11px)}
 .step{position:relative;padding:26px 0;border-top:1px solid var(--line)}
 .step:first-child{border-top:none}
-.step-marker{position:absolute;left:-56px;top:26px;width:39px;height:39px;border-radius:50%;background:var(--surface);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
+.step-marker{position:absolute;inset-inline-start:-56px;top:26px;width:39px;height:39px;border-radius:50%;background:var(--surface);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
 .step-body{display:grid;grid-template-columns:1fr;gap:6px}
 .step h3{font-size:18px}
 .step p{color:var(--ink-soft);font-size:14.5px;max-width:62ch}
@@ -150,7 +161,7 @@ section{padding:76px 0}
 .waitlist-form{margin-top:28px;display:flex;gap:10px;border:1px solid var(--line-strong);border-radius:3px;padding:5px;background:var(--surface)}
 @media(max-width:520px){.waitlist-form{flex-direction:column;border:none;padding:0;gap:10px}}
 .waitlist-form input{flex:1;border:none;background:transparent;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-width:0}
-.waitlist-form input:focus{outline:none}
+.waitlist-form input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 @media(max-width:520px){.waitlist-form input{border:1px solid var(--line-strong);border-radius:3px}}
 .waitlist-form button{border-radius:2px}
 .waitlist-msg{margin-top:16px;font-size:13.5px;color:var(--good);display:none;align-items:center;justify-content:center;gap:8px}
@@ -166,6 +177,8 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
 .footer-langs span:not(.on){color:var(--muted);cursor:default}
 .footer-note{margin-top:18px;font-size:12px;color:var(--muted)}
 </style>
+</head>
+<body>
 
 <header class="site-header">
   <div class="wrap row">
@@ -173,7 +186,7 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
       <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1"/><path d="M9 21 L17 10 L25 21" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1.4"/><path d="M12.5 21 L17 14.5 L21.5 21" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="1.4"/><circle cx="17" cy="24" r="1.1" fill="var(--accent)"/></svg>
       <div class="word"><span class="en">Mimarak</span><span class="tag">معمارك</span></div>
     </div>
-    <nav class="header-links">
+    <nav class="header-links" aria-label="Navigation principale">
       <a href="#parcours">Parcours</a>
       <a href="#rigueur">Rigueur technique</a>
       <a class="btn btn-primary header-cta" href="#liste-attente">Rejoindre la liste d'attente</a>
@@ -306,9 +319,9 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
         <button class="btn btn-primary" type="submit">Rejoindre</button>
       </form>
       <p class="waitlist-msg" id="waitlist-msg" role="status">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
-        Merci — vous serez informé(e) dès l'ouverture des premiers accès.
+        La liste d'attente n'est pas encore ouverte : aucune adresse n'a été enregistrée.
       </p>
+      <p class="footer-note">Tant que le service n'est pas branché, votre adresse reste dans ce formulaire et n'est transmise nulle part.</p>
     </div>
   </section>
 </main>
@@ -322,8 +335,8 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
       </div>
       <div class="footer-links">
         <span style="color:var(--ink-soft)">MIMARAK — Tunisie</span>
-        <a href="#">À propos</a>
-        <a href="#liste-attente">Contact</a>
+        <span title="Page À propos à venir">À propos</span>
+        <a href="#liste-attente">Liste d'attente</a>
       </div>
       <div class="footer-langs">
         <span class="on">FR</span><span title="Traduction arabe en attente de relecture (tâche T6)">AR</span><span title="Pas encore rédigé">EN</span>
@@ -340,10 +353,11 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
   form.addEventListener('submit', function(e){
     e.preventDefault();
     // Aucun service d'e-mail n'est encore branché (voir COLLAB.md) : ceci
-    // affiche le message de confirmation prévu par le contenu, sans
-    // prétendre enregistrer réellement l'adresse quelque part.
-    form.hidden = true;
+    // indique explicitement l'absence de collecte : aucune confirmation
+    // d'inscription n'est affichée tant qu'un service réel n'est pas branché.
     msg.classList.add('show');
   });
 })();
 </script>
+</body>
+</html>
