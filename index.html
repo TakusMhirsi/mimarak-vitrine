@@ -176,9 +176,14 @@ section{padding:76px 0}
 .waitlist-form input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 @media(max-width:520px){.waitlist-form input{border:1px solid var(--line-strong);border-radius:3px}}
 .waitlist-form button{border-radius:2px}
-.waitlist-msg{margin-top:16px;font-size:13.5px;color:var(--good);display:none;align-items:center;justify-content:center;gap:8px}
-.waitlist-msg.show{display:flex}
-.waitlist-msg svg{color:var(--good)}
+.waitlist-consent{display:flex;gap:10px;align-items:flex-start;margin-top:14px;text-align:start;font-size:13px;color:var(--ink-soft);cursor:pointer}
+.waitlist-consent input{margin-top:3px;accent-color:var(--accent);flex:none}
+.waitlist-consent input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.waitlist-consent a{color:var(--accent-deep)}
+.waitlist-msg{margin-top:16px;font-size:13.5px;color:var(--good);min-height:1.6em}
+.waitlist-msg.error{color:var(--ink-soft)}
+.waitlist-msg a{color:var(--accent-deep)}
+.btn[disabled]{opacity:.6;cursor:progress}
 
 /* ---------- footer ---------- */
 footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
@@ -341,14 +346,17 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
       <span class="eyebrow" style="justify-content:center">Être averti au lancement</span>
       <h2 style="margin-top:14px">Rejoindre la liste d'attente</h2>
       <p>Vous serez informé(e) dès l'ouverture des premiers accès.</p>
-      <form class="waitlist-form" id="waitlist-form">
-        <input id="waitlist-email" type="email" required placeholder="vous@exemple.com" aria-label="Adresse e-mail">
-        <button class="btn btn-primary" type="submit">Rejoindre</button>
+      <form id="waitlist-form">
+        <div class="waitlist-form">
+          <input id="waitlist-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="vous@exemple.com" aria-label="Adresse e-mail">
+          <button class="btn btn-primary" id="waitlist-submit" type="submit">Rejoindre</button>
+        </div>
+        <label class="waitlist-consent">
+          <input id="waitlist-consent" type="checkbox" required>
+          <span>J'accepte que mon adresse soit conservée uniquement pour être prévenu(e) de l'ouverture. <a href="confidentialite.html">Confidentialité</a></span>
+        </label>
       </form>
-      <p class="waitlist-msg" id="waitlist-msg" role="status">
-        La liste d'attente n'est pas encore ouverte : aucune adresse n'a été enregistrée.
-      </p>
-      <p class="footer-note">Tant que le service n'est pas branché, votre adresse reste dans ce formulaire et n'est transmise nulle part.</p>
+      <p class="waitlist-msg" id="waitlist-msg" role="status" aria-live="polite"></p>
     </div>
   </section>
 </main>
@@ -363,7 +371,8 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
       <div class="footer-links">
         <span style="color:var(--ink-soft)">MIMARAK — Tunisie</span>
         <span title="Page À propos à venir">À propos</span>
-        <a href="#liste-attente">Liste d'attente</a>
+        <a href="mailto:mhirsiabdou@gmail.com">Contact</a>
+        <a href="confidentialite.html">Confidentialité</a>
       </div>
       <div class="footer-langs">
         <span class="on">FR</span><span title="Traduction arabe en attente de relecture (tâche T6)">AR</span><span title="Pas encore rédigé">EN</span>
@@ -375,14 +384,54 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
 
 <script>
 (function(){
+  // Liste d'attente : table Supabase `waitlist` (voir supabase/migrations/).
+  // La clé ci-dessous est la clé *publiable* du projet, faite pour être
+  // visible dans une page web : elle ne permet que d'insérer une adresse
+  // (ni lecture, ni modification, ni suppression — RLS + privilèges).
+  var ENDPOINT = 'https://sogjegeiufhvhhjbjtgr.supabase.co/rest/v1/waitlist';
+  var PUBLISHABLE_KEY = 'sb_publishable_BsoGSiK7FQheTd8VitkZbw_vMvwiIW9';
+  var CONTACT = 'mhirsiabdou@gmail.com';
+
   var form = document.getElementById('waitlist-form');
+  var email = document.getElementById('waitlist-email');
+  var button = document.getElementById('waitlist-submit');
   var msg = document.getElementById('waitlist-msg');
+
+  function show(text, isError){
+    msg.textContent = text;
+    msg.classList.toggle('error', !!isError);
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    // Aucun service d'e-mail n'est encore branché (voir COLLAB.md) : ceci
-    // indique explicitement l'absence de collecte : aucune confirmation
-    // d'inscription n'est affichée tant qu'un service réel n'est pas branché.
-    msg.classList.add('show');
+    button.disabled = true;
+    button.textContent = 'Envoi…';
+    show('', false);
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'apikey': PUBLISHABLE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email.value.trim(), locale: document.documentElement.lang || 'fr' })
+    }).then(function(res){
+      // 409 = adresse déjà inscrite : même message, pour ne pas révéler
+      // qui figure sur la liste.
+      if (res.ok || res.status === 409) {
+        form.reset();
+        show("Merci — vous serez informé(e) dès l'ouverture des premiers accès.", false);
+      } else if (res.status === 400) {
+        show("Cette adresse ne semble pas valide. Vérifiez-la et réessayez.", true);
+      } else {
+        throw new Error('HTTP ' + res.status);
+      }
+    }).catch(function(){
+      show("L'inscription n'a pas pu être enregistrée. Réessayez plus tard, ou écrivez à " + CONTACT + ".", true);
+    }).then(function(){
+      button.disabled = false;
+      button.textContent = 'Rejoindre';
+    });
   });
 })();
 </script>
