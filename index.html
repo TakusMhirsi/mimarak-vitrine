@@ -132,7 +132,19 @@ section{padding:76px 0}
 .step:first-child{border-top:none}
 .step-marker{position:absolute;inset-inline-start:-56px;top:26px;width:39px;height:39px;border-radius:50%;background:var(--surface);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
 .step-body{display:grid;grid-template-columns:1fr;gap:6px}
-.step h3{font-size:18px}
+.step h4{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:18px;margin:0;color:var(--ink)}
+.status-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.status-head h3{font-size:21px}
+.status-note{margin-top:6px;font-size:13.5px;color:var(--muted)}
+.badge{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.badge-live{background:var(--good-bg);color:var(--good)}
+.badge-planned{border:1px dashed var(--line-strong);color:var(--ink-soft)}
+.roadmap{margin-top:44px;padding:28px 30px;border:1px dashed var(--line-strong);border-radius:3px}
+@media(max-width:640px){.roadmap{padding:24px 20px}}
+.roadmap ul{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 36px}
+@media(max-width:720px){.roadmap ul{grid-template-columns:1fr}}
+.roadmap li{position:relative;padding-inline-start:26px;color:var(--ink-soft);font-size:14.5px}
+.roadmap li::before{content:"";position:absolute;inset-inline-start:0;top:.45em;width:12px;height:12px;border-radius:50%;border:1.5px dashed var(--muted)}
 .step p{color:var(--ink-soft);font-size:14.5px;max-width:62ch}
 .transparency-note{margin-top:36px;padding:20px 22px;border:1px solid var(--line-strong);border-radius:3px;background:var(--surface-2);font-size:13.5px;color:var(--ink-soft);display:flex;gap:14px;align-items:flex-start}
 .transparency-note svg{flex:none;margin-top:2px;color:var(--accent)}
@@ -209,7 +221,7 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
     <div class="wrap hero-inner">
       <span class="eyebrow">Assistance architecte / client</span>
       <h1>Du terrain au dossier de chantier, un seul fil conducteur.</h1>
-      <p class="lede">MIMARAK aide l'architecte et son client à avancer ensemble : terrain, besoins, plans, réseaux techniques, rendu 3D, chiffrage — jusqu'au dossier remis à l'entrepreneur.</p>
+      <p class="lede">MIMARAK aide l'architecte et son client à avancer ensemble : terrain, besoins, plans 2D et réseaux techniques dès aujourd'hui ; rendu 3D, chiffrage détaillé et dossier de chantier ensuite.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#liste-attente">Rejoindre la liste d'attente</a>
         <a class="btn btn-ghost" href="#parcours">Voir le parcours</a>
@@ -245,36 +257,51 @@ footer{padding:40px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1p
   <section id="parcours" class="parcours">
     <div class="wrap">
       <span class="eyebrow">Le parcours</span>
-      <h2 style="font-size:clamp(24px,3.4vw,34px);margin-top:14px;max-width:30ch">Sept étapes, du terrain au dossier final</h2>
-      <div class="scale-rule" style="margin-top:22px"><span class="tick"></span><span class="track"></span><span>7 étapes</span><span class="track"></span><span class="tick"></span></div>
+      <h2 style="font-size:clamp(24px,3.4vw,34px);margin-top:14px;max-width:30ch">Ce qui fonctionne aujourd'hui, et ce qui vient ensuite</h2>
 
-      <div class="spine" style="margin-top:36px">
+      <div class="status-head" style="margin-top:36px">
+        <h3 id="disponible">Disponible aujourd'hui</h3>
+        <span class="badge badge-live">5 étapes</span>
+      </div>
+      <p class="status-note">Dans l'atelier de conception MIMARAK — premiers accès via la liste d'attente.</p>
+
+      <div class="spine" style="margin-top:22px">
         <div class="step"><span class="step-marker">01</span>
-          <div class="step-body"><h3>Terrain</h3><p>COS, hauteur maximale autorisée, réseaux disponibles en façade (STEG, SONEDE, ONAS), contraintes et servitudes.</p></div>
+          <div class="step-body"><h4>Terrain</h4><p>Dimensions de la parcelle, retraits, orientation et points de raccordement aux réseaux (eau SONEDE, électricité STEG, assainissement ONAS) avec leur source. Un réseau non renseigné reste marqué « inconnu ».</p></div>
         </div>
         <div class="step"><span class="step-marker">02</span>
-          <div class="step-body"><h3>Besoins &amp; priorités</h3><p>Nombre de pièces, et un questionnaire de priorités (lumière, intimité, rangements, domotique...) qui oriente les propositions plutôt que de les imposer.</p></div>
+          <div class="step-body"><h4>Programme &amp; style</h4><p>Pièces, surfaces, équipements, adjacences souhaitées et scénarios d'usage ; une direction parmi dix profils de style (dont néo-mauresque et tunisien traditionnel) qui oriente sans imposer.</p></div>
         </div>
         <div class="step"><span class="step-marker">03</span>
-          <div class="step-body"><h3>Style</h3><p>Choix d'une direction architecturale, ou import d'un plan déjà dessiné par l'architecte.</p></div>
+          <div class="step-body"><h4>Plans 2D</h4><p>Trois variantes reproductibles de plain-pied, contrôlées (géométrie, circulation, ouvertures). Une variante invalide reste visible, avec son explication.</p></div>
         </div>
         <div class="step"><span class="step-marker">04</span>
-          <div class="step-body"><h3>Plans proposés</h3><p>Plusieurs variantes comparées sur des critères concrets : surface, coût gros œuvre estimé, longueur de plomberie.</p></div>
+          <div class="step-body"><h4>Réseaux techniques</h4><p>Sur la variante choisie par l'architecte : implantation du collecteur de plomberie (EF/ECS/évacuation), schéma de principe, couverture électrique pièce par pièce. Chaque contrôle est validé, en échec ou inconnu — jamais validé par défaut.</p></div>
         </div>
         <div class="step"><span class="step-marker">05</span>
-          <div class="step-body"><h3>Réseaux techniques</h3><p>Plomberie (EF/ECS/évacuation) et électricité générées sur le plan choisi, avec tableaux de synthèse et checklist de cohérence.</p></div>
-        </div>
-        <div class="step"><span class="step-marker">06</span>
-          <div class="step-body"><h3>Rendu 3D &amp; validation</h3><p>Visite du volume proposé, document de validation signé entre l'architecte et le client.</p></div>
-        </div>
-        <div class="step"><span class="step-marker">07</span>
-          <div class="step-body"><h3>Chiffrage &amp; dossier final</h3><p>Quantitatifs, main-d'œuvre, et dossier remis à l'entrepreneur.</p></div>
+          <div class="step-body"><h4>Exports &amp; ordre de prix</h4><p>Plans SVG par calques et DXF lisibles en DAO, estimation indicative du gros œuvre au m² sur un tarif déclaré, quantitatif en nombre d'équipements.</p></div>
         </div>
       </div>
 
+      <div class="roadmap">
+        <div class="status-head">
+          <h3 id="feuille-de-route">Feuille de route</h3>
+          <span class="badge badge-planned">Prévu</span>
+        </div>
+        <p class="status-note">Pas encore disponible. Aucune date annoncée.</p>
+        <ul aria-labelledby="feuille-de-route">
+          <li>Vérification automatique des règles d'urbanisme (COS, hauteur maximale).</li>
+          <li>Étages et formes de plan non rectangulaires.</li>
+          <li>Import d'un plan déjà dessiné par l'architecte.</li>
+          <li>Rendu 3D et visite du volume.</li>
+          <li>Document de validation signé entre l'architecte et le client.</li>
+          <li>Chiffrage détaillé (métrés réels, main-d'œuvre) et dossier final remis à l'entrepreneur.</li>
+        </ul>
+      </div>
+
       <div class="transparency-note">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-        <p>Les plans et rendus 3D sont des propositions à valider par l'architecte. Les règles de plomberie et d'électricité s'appuient sur des référentiels techniques dédiés ; toute valeur non confirmée reste marquée comme non vérifiée plutôt que d'être arrondie silencieusement.</p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <p>Les plans et analyses sont des propositions d'étude à valider par l'architecte, pas des plans d'exécution. Les règles de plomberie et d'électricité s'appuient sur des référentiels techniques dédiés ; toute valeur non confirmée reste marquée comme non vérifiée plutôt que d'être arrondie silencieusement.</p>
       </div>
     </div>
   </section>
